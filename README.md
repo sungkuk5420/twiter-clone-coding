@@ -35,5 +35,5 @@ npm install react-router-dom@6.14.2
 npm install styled-reset
 npm install styled-components@6.0.7
 npm install @types/styled-components -D
-npm install firebase
+npm install firebase@10.1.0
 ```
