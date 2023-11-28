@@ -81,7 +81,7 @@ export default function PostTweetForm(){
       const doc = await addDoc(collection(db,"tweets"),
       {
         tweet,
-        createAt:Date.now(),
+        createdAt:Date.now(),
         username : user.displayName || "Anonymous",
         userId: user.uid,
       });
@@ -105,7 +105,7 @@ export default function PostTweetForm(){
   }
   return <Form onSubmit={onSubmit}>
     <TextArea rows={5} maxLength={180} value={tweet} onChange={onChange} placeholder="what is happening?"></TextArea>
-    <AttachFileButton htmlFor="file">{file?"phjoto added":"Add photo"}</AttachFileButton>
+    <AttachFileButton htmlFor="file">{file?"photo added✅":"Add photo"}</AttachFileButton>
     <AttachFileInput onChange={onFileChange} type="file" id="file" accept="image/*"></AttachFileInput>
     <SubmitBtn type="submit" value="Post tweet"></SubmitBtn>
   </Form>

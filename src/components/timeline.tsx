@@ -1,5 +1,6 @@
-import { collection, getDocs, limit, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection,  limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Unsubscribe } from "firebase/auth";
 import { styled } from "styled-components";
 import { db } from "../firebase";
 import Tweet from "./tweet";
@@ -9,7 +10,7 @@ export interface ITweet {
   photo:string;
   tweet:string,
   userId:string,
-  createAt:number,
+  createdAt:number,
   username:string;
 }
 
@@ -26,16 +27,16 @@ export default function Timeline() {
     const fetchTweets = async() => {
       const tweetsQuery = query(
         collection(db,"tweets"),
-        orderBy("createAt","desc"),
+        orderBy("createdAt","desc"),
         limit(25)
       );
       // const snapshot = await getDocs(tweetsQuery);
       // const tweets = snapshot.docs.map(doc=>
       //   {
-      //     const {tweet,createAt,userId,username,photo} = doc.data(); 
+      //     const {tweet,createdAt,userId,username,photo} = doc.data(); 
       //     return {
       //       tweet,
-      //       createAt,
+      //       createdAt,
       //       userId,
       //       username,
       //       photo,
@@ -46,10 +47,10 @@ export default function Timeline() {
       unsubscribe = await onSnapshot(tweetsQuery, (snapshot)=>{
         const tweets = snapshot.docs.map(doc=>
         {
-          const {tweet,createAt,userId,username,photo} = doc.data(); 
+          const {tweet,createdAt,userId,username,photo} = doc.data(); 
           return {
             tweet,
-            createAt,
+            createdAt,
             userId,
             username,
             photo,
